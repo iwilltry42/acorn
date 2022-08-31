@@ -2,7 +2,7 @@
 title: Publishing Acorn Images
 ---
 
-Once the application is in a state where it ready to move to test and production you will need to build an Acorn image and publish it to a registry. Acorn images are only accessible to the Acorn namespace they were built in. In order to use them in other namespaces or on other Kubernetes clusters, the images need to be tagged and published to a registry.
+Once the application is in a state where it is ready to move to test and production you will need to build an Acorn image and publish it to a registry. Acorn images are only accessible to the Acorn namespace they were built in. In order to use them in other namespaces or on other Kubernetes clusters, the images need to be tagged and published to a registry.
 
 ## Building and tagging an Acorn image
 
@@ -36,7 +36,7 @@ To tag and prepare to push to Dockerhub `index.docker.io/my-org/image:version` r
 acorn tag [MY-IMAGE] /myorg/image:latest
 ```
 
-## Pushing Acorn image to production
+## Pushing an Acorn image to a registry
 
 Once the image is tagged, it is ready to be pushed to the remote registry.
 
@@ -46,23 +46,23 @@ First you will need to login with credentials that have push access to the remot
 
 ```shell
 
-# Docker hub
+# Docker Hub
 acorn login index.docker.io
 
 # - or -
 
-#GitHub container registry
+# GitHub container registry
 acorn login ghcr.io
 ```
 
-You will be prompted for your username and password to login. If your company has an internal registry you can login subtituting `ghcr.io` for your organizations registry domain.
+You will be prompted for your username and password to login. If your company has an internal registry you can login substituting `ghcr.io` for your organizations registry domain.
 
 ### Push the image
 
 Pushing to a registry requires 2 things:
 
 1. User is logged in and authorized.
-1. Image is tagged  the remote registry.
+1. Image is tagged to the remote registry.
 
 ```shell
 acorn push index.docker.io/myorg/image:v1.0
@@ -70,7 +70,7 @@ acorn push index.docker.io/myorg/image:v1.0
 
 ## Pulling / Running the Acorn image
 
-Once the image has been published to a registry, it can be run on other clusters that have access to that registry. You can run the acorn and the Acorn image will automatically be pulled.
+Once the image has been published to a registry, it can be run on other clusters that have access to that registry. You can run the Acorn and the Acorn image will automatically be pulled.
 
 ```shell
 acorn run index.docker.io/myorg/image:v1.0

@@ -34,5 +34,6 @@ Second-level keys defined by the user underneath the `containers`, `volumes`, `s
 * Contain only lowercase alphanumeric characters, `-` or `.`
 * Start with an alphanumeric character
 * End with an alphanumeric character
+* Be quoted with `"` if they contain `-`
 
 Keys defined in `args`, `profiles`, and `localData` should use camelCase.

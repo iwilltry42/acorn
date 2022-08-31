@@ -20,7 +20,7 @@ args: {
 }
 ```
 
-Arg names should be in camelCase, and when entered by the user the will be dash separated.
+Arg names should be in camelCase, and when entered by the user they will be dash separated.
 
 `thisVariableName` becomes `--this-variable-name` when the user passes it on the command line.
 
@@ -71,24 +71,6 @@ toplevel:
 The config file can then be passed to the Acorn using  
 `acorn run [IMAGE] --user-config-data @config.yaml`
 
-### Built-in
-
-To prevent the author from having to create a profile, Acorn provides the `args.dev` boolean value. It is set to `true` when running in dev mode (`acorn run -i`). Acorn authors can use this boolean with `if` statements to change dev vs. production runtime behaviors.
-
-```acorn
-containers: {
-    web: {
-        // ...
-        if args.dev {
-            ports: publish: "1313/http"
-        }
-        if !args.dev {
-            ports: publish: "80/http"
-        }
-    }
-}
-```
-
 ## Profiles
 
 Profiles specify default arguments for different contexts like dev, test, and prod. This makes it easier for the end user to consume the Acorn application. When developing an application, often there are non-prod ports, different Dockerfile build targets, and replica counts differ from prod. Authors can define a different set of defaults for each environment.
@@ -108,6 +90,24 @@ profiles: {
 In this case when an Acorn consumer deploys the Acorn in production, 3 replicas will be deployed. When the developer working on this app runs it locally with `acorn run --profile dev .` there will only be a single replica deployed by default.
 
 In either case, consumers of the Acorn can pass `--replicas #` to customize the deployment.
+
+### Built-in
+
+To prevent the author from having to create a profile, Acorn provides the `args.dev` boolean value. It is set to `true` when running in dev mode (`acorn run -i`). Acorn authors can use this boolean with `if` statements to change dev vs. production runtime behaviors.
+
+```acorn
+containers: {
+    web: {
+        // ...
+        if args.dev {
+            ports: publish: "1313/http"
+        }
+        if !args.dev {
+            ports: publish: "80/http"
+        }
+    }
+}
+```
 
 ## Using args in the Acornfile
 
@@ -142,7 +142,7 @@ localData: {
 
 ### In a string or template
 
-When using an arg in a string or template the '.' variable needs to be placed in "\()".
+When using an arg in a string or template the '.' variable needs to be placed in `\()`.
 
 ```acorn
 args: {

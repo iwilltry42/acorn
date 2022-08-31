@@ -113,7 +113,7 @@ localData: {
 
 Strings can be a single line or multiline.  A single line string is surrounded by `"` quotes.
 
-Multiline strings are enclosed in triple quotes `"""`. The opening `"""` must be followed by a newline. The closing `"""` must also be on it's own line. The whitespace directly preceding the closing quotles must match the preceding whitespace on all other lines and is not included not included in the value.  This allows you to indent the text to match current level without the indenting becoming part of the actual value.
+Multiline strings are enclosed in triple quotes `"""`. The opening `"""` must be followed by a newline. The closing `"""` must also be on it's own line. The whitespace directly preceding the closing quotes must match the preceding whitespace on all other lines and is not included in the value.  This allows you to indent the text to match current level without the indentation becoming part of the actual value.
 
 ```acorn
 singleLine: "Hi!"
@@ -200,7 +200,7 @@ In the above example, `containers.app.ports` would be `3306` along with `localDa
 
 #### Aliases
 
-Because of scoping in the previous example, it would not be possible in the above example to set any value under localData to a value of `port`(3307). One way to address this is to use the `let` operator to alias the port variable.
+Because of scoping in the previous example, it would not be possible in the above example to set any value under localData to the value of `port` (3307). One way to address this is to use the `let` operator to alias the port variable.
 
 ```acorn
 let topLevelPort = port
@@ -232,7 +232,7 @@ localData: {
     }
 }
 
-# localData.config.key is "This is something cool"
+// localData.config.key evaluates to "This is something cool"
 ```
 
 Interpolation can also be used for field names:
@@ -248,7 +248,7 @@ containers: {
     }
 }
 
-# A container named "my-app-3" is being defined
+// A container named "my-app-3" is being defined
 ```
 
 ### Assigning a variable to another field
@@ -389,7 +389,7 @@ localData:{
     }
 }
 
-for k, v in localData.config { 
+for k, v in localData.dataVols { 
     volumes: {
        "\(k)": {}
     }
