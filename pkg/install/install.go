@@ -175,7 +175,7 @@ func Install(ctx context.Context, image string, opts *Options) error {
 		s := opts.Progress.New("Running Pre-install Checks")
 		checkResults := PreInstallChecks(ctx, checkOpts)
 		if IsFailed(checkResults) {
-			msg := "Pre-install checks failed. Use `acorn check` to debug or `acorn install --checks=false` to skip"
+			msg := "Pre-install checks failed. Use `acorn check` to debug or `acorn install --skip-checks` to skip"
 			for _, result := range checkResults {
 				if !result.Passed {
 					msg += fmt.Sprintf("\n%s: %s", result.Name, result.Message)
@@ -248,7 +248,7 @@ func Install(ctx context.Context, image string, opts *Options) error {
 		s = opts.Progress.New("Running Post-install Checks")
 		checkResults := PostInstallChecks(ctx, checkOpts)
 		if IsFailed(checkResults) {
-			msg := "Post-install checks failed. Use `acorn check` to debug or `acorn install --checks=false` to skip"
+			msg := "Post-install checks failed. Use `acorn check` to debug or `acorn install --skip-checks` to skip"
 			for _, result := range checkResults {
 				if !result.Passed {
 					msg += fmt.Sprintf("\n%s: %s", result.Name, result.Message)
