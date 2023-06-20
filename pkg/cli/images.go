@@ -30,6 +30,7 @@ acorn images`,
 	cmd.AddCommand(NewImageDelete(c))
 	cmd.AddCommand(NewImageDetails(c))
 	cmd.AddCommand(NewImageSign(c))
+	cmd.AddCommand(NewImageVerify(c))
 	return cmd
 }
 
