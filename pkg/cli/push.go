@@ -7,6 +7,7 @@ import (
 	"github.com/acorn-io/acorn/pkg/credentials"
 	"github.com/acorn-io/acorn/pkg/progressbar"
 	"github.com/google/go-containerregistry/pkg/name"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +22,10 @@ func NewPush(c CommandContext) *cobra.Command {
 }
 
 type Push struct {
-	client ClientFactory
+	client               ClientFactory
+	Sign                 bool              `usage:"Sign the image before pushing" short:"s" local:"true" default:"false"`
+	Key                  string            `usage:"Key to use for signing" short:"k" local:"true" default:"./cosign.key"`
+	SignatureAnnotations map[string]string `usage:"Annotations to add to the signature" short:"a" local:"true"`
 }
 
 func (s *Push) Run(cmd *cobra.Command, args []string) error {
@@ -57,5 +61,23 @@ func (s *Push) Run(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	return progressbar.Print(prog)
+	if err := progressbar.Print(prog); err != nil {
+		return err
+	}
+
+	if s.Sign {
+		sign := ImageSign{
+			client:      s.client,
+			Key:         s.Key,
+			Annotations: s.SignatureAnnotations,
+			Push:        true,
+		}
+		if err := sign.Run(cmd, args); err != nil {
+			return err
+		}
+
+		pterm.Success.Printf("Pushed and signed %s\n", args[0])
+	}
+
+	return nil
 }
