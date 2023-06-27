@@ -40,6 +40,7 @@ const (
 	AcornOriginalImage                  = Prefix + "original-image"
 	AcornPortNumberPrefix               = "port-number." + Prefix
 	AcornCredential                     = Prefix + "credential"
+	AcornCryptoKey                      = Prefix + "crypto-key"
 	AcornPullSecret                     = Prefix + "pull-secret"
 	AcornSecretRevPrefix                = "secret-rev." + Prefix
 	AcornPublishURL                     = Prefix + "publish-url"
