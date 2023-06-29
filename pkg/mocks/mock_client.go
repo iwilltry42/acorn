@@ -6,6 +6,7 @@ package mocks
 
 import (
 	context "context"
+	crypto "crypto"
 	reflect "reflect"
 
 	v1 "github.com/acorn-io/acorn/pkg/apis/api.acorn.io/v1"
@@ -629,6 +630,66 @@ func (m *MockClient) Info(arg0 context.Context) ([]v1.Info, error) {
 func (mr *MockClientMockRecorder) Info(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Info", reflect.TypeOf((*MockClient)(nil).Info), arg0)
+}
+
+// KeyCreate mocks base method.
+func (m *MockClient) KeyCreate(arg0 context.Context, arg1 crypto.PublicKey) (*v1.PublicKey, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "KeyCreate", arg0, arg1)
+	ret0, _ := ret[0].(*v1.PublicKey)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// KeyCreate indicates an expected call of KeyCreate.
+func (mr *MockClientMockRecorder) KeyCreate(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "KeyCreate", reflect.TypeOf((*MockClient)(nil).KeyCreate), arg0, arg1)
+}
+
+// KeyDelete mocks base method.
+func (m *MockClient) KeyDelete(arg0 context.Context, arg1 string) (*v1.PublicKey, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "KeyDelete", arg0, arg1)
+	ret0, _ := ret[0].(*v1.PublicKey)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// KeyDelete indicates an expected call of KeyDelete.
+func (mr *MockClientMockRecorder) KeyDelete(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "KeyDelete", reflect.TypeOf((*MockClient)(nil).KeyDelete), arg0, arg1)
+}
+
+// KeyGet mocks base method.
+func (m *MockClient) KeyGet(arg0 context.Context, arg1 string) (*v1.PublicKey, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "KeyGet", arg0, arg1)
+	ret0, _ := ret[0].(*v1.PublicKey)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// KeyGet indicates an expected call of KeyGet.
+func (mr *MockClientMockRecorder) KeyGet(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "KeyGet", reflect.TypeOf((*MockClient)(nil).KeyGet), arg0, arg1)
+}
+
+// KeyList mocks base method.
+func (m *MockClient) KeyList(arg0 context.Context) ([]v1.PublicKey, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "KeyList", arg0)
+	ret0, _ := ret[0].([]v1.PublicKey)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// KeyList indicates an expected call of KeyList.
+func (mr *MockClientMockRecorder) KeyList(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "KeyList", reflect.TypeOf((*MockClient)(nil).KeyList), arg0)
 }
 
 // ProjectCreate mocks base method.
