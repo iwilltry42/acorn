@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 
+	apiv1 "github.com/acorn-io/runtime/pkg/apis/api.acorn.io/v1"
 	v1 "github.com/acorn-io/runtime/pkg/apis/internal.acorn.io/v1"
 	"github.com/acorn-io/runtime/pkg/config"
 	"github.com/acorn-io/runtime/pkg/images"
@@ -37,6 +38,24 @@ func CheckImageAllowed(ctx context.Context, c client.Reader, namespace, imageNam
 		return err
 	} else if !enabled {
 		return nil
+	}
+
+	// We really try to resolve the name, so that we'll also be able to lookup local signature references.
+	// If we can't resolve the name, we'll just continue and try our best.
+	if resolvedName == "" || resolvedName == imageName {
+		var imgs apiv1.ImageList
+		err := c.List(ctx, &imgs, &client.ListOptions{Namespace: namespace})
+		if err == nil {
+			img, _, err := images.FindImageMatch(imgs, imageName)
+			if err == nil && img != nil {
+				if digest == img.Digest {
+					resolvedName = img.Name
+					if digest == "" {
+						digest = img.Digest
+					}
+				}
+			}
+		}
 	}
 
 	// Get ImageAllowRules in the same namespace as the AppInstance
